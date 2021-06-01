@@ -1,6 +1,7 @@
 import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { CardActions, ECardActions } from '../actions/card.actions';
+import { PostActions } from '../actions/posts.actions';
 import { ECardStatus, ICard } from '../card.model';
 
 export interface KanbanState {
@@ -47,5 +48,6 @@ export const kanbanReducers = createReducer(
       return { ...state, cards };
     }
     return state;
-  })
+  }),
+  on(PostActions.loadSuccess, (state, { posts }) => ({ ...state, posts }))
 );

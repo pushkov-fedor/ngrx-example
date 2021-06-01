@@ -1,3 +1,4 @@
+import { selectPosts } from './store/selectors/post.selectors';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -21,6 +22,7 @@ export class AppComponent {
   toDoCards$: Observable<ICard[]>;
   inProgressCards$: Observable<ICard[]>;
   doneCards$: Observable<ICard[]>;
+  posts$: Observable<any[]>;
 
   id = 1;
   cardStatusEnum = ECardStatus;
@@ -33,6 +35,7 @@ export class AppComponent {
     this.toDoCards$ = this.store.select(selectToDoCards);
     this.inProgressCards$ = this.store.select(selectInProgressCards);
     this.doneCards$ = this.store.select(selectDoneCards);
+    this.posts$ = this.store.select(selectPosts);
   }
 
   onMoveCard(card: ICard, newCardStatus: ECardStatus) {

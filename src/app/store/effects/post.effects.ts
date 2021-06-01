@@ -11,7 +11,7 @@ export class PostEffects {
       ofType(PostActions.load),
       mergeMap(() =>
         this.postSevice.getPosts().pipe(
-          map((posts) => PostActions.loadSuccess(posts)),
+          map((posts) => PostActions.loadSuccess({ posts })),
           catchError(() => PostActions.loadSuccess('Something went wrong'))
         )
       )
