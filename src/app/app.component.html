@@ -2,16 +2,71 @@
   <div class="row">
     <div class="col text-center">
       <h2 class="border py-3">To Do</h2>
+      <div
+        class="card text-white bg-primary mb-3"
+        *ngFor="let card of toDoCards$ | async"
+      >
+        <div class="card-header"></div>
+        <div class="card-body">
+          <p class="card-text">{{ card.message }}</p>
+        </div>
+        <div class="card-controls d-flex justify-content-around mb-2">
+          <button
+            class="btn btn-success"
+            (click)="onMoveCard(card, cardStatusEnum.InProgress)"
+          >
+            Move Right
+          </button>
+        </div>
+      </div>
     </div>
     <div class="col text-center">
       <h2 class="border py-3">In Progress</h2>
+      <div
+        class="card text-dark bg-warning mb-3"
+        *ngFor="let card of inProgressCards$ | async"
+      >
+        <div class="card-header"></div>
+        <div class="card-body">
+          <p class="card-text">{{ card.message }}</p>
+        </div>
+        <div class="card-controls d-flex justify-content-around mb-2">
+          <button
+            class="btn btn-warning"
+            (click)="onMoveCard(card, cardStatusEnum.ToDo)"
+          >
+            Move Left
+          </button>
+          <button
+            class="btn btn-success"
+            (click)="onMoveCard(card, cardStatusEnum.Done)"
+          >
+            Move Right
+          </button>
+        </div>
+      </div>
     </div>
     <div class="col text-center">
       <h2 class="border py-3">Done</h2>
+      <div
+        class="card text-white bg-success mb-3"
+        *ngFor="let card of doneCards$ | async"
+      >
+        <div class="card-header"></div>
+        <div class="card-body">
+          <p class="card-text">{{ card.message }}</p>
+        </div>
+        <div class="card-controls d-flex justify-content-around mb-2">
+          <button
+            class="btn btn-warning"
+            (click)="onMoveCard(card, cardStatusEnum.InProgress)"
+          >
+            Move Left
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <hr />
-
-<div>{{ cards$ | async | json }}</div>

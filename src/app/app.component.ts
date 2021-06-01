@@ -2,8 +2,14 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IAppState } from './app.module';
-import { ICard } from './store/card.model';
-import { selectCards } from './store/selectors/card.selectors';
+import { CardActions } from './store/actions/card.actions';
+import { ECardStatus, ICard } from './store/card.model';
+import {
+  selectCards,
+  selectToDoCards,
+  selectInProgressCards,
+  selectDoneCards,
+} from './store/selectors/card.selectors';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +17,24 @@ import { selectCards } from './store/selectors/card.selectors';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  cards$: Observable<ICard[]>;
+  toDoCards$: Observable<ICard[]>;
+  inProgressCards$: Observable<ICard[]>;
+  doneCards$: Observable<ICard[]>;
+
+  id = 1;
+  cardStatusEnum = ECardStatus;
 
   constructor(private store: Store<IAppState>) {}
 
   ngOnInit() {
-    this.cards$ = this.store.select(selectCards);
+    this.toDoCards$ = this.store.select(selectToDoCards);
+    this.inProgressCards$ = this.store.select(selectInProgressCards);
+    this.doneCards$ = this.store.select(selectDoneCards);
+  }
+
+  onMoveCard(card: ICard, newCardStatus: ECardStatus) {
+    this.store.dispatch(
+      CardActions.changeStatus({ cardId: card.id, newStatus: newCardStatus })
+    );
   }
 }
