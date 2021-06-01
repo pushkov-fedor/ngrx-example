@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IAppState } from './app.module';
 import { CardActions } from './store/actions/card.actions';
+import { PostActions } from './store/actions/posts.actions';
 import { ECardStatus, ICard } from './store/card.model';
 import {
   selectCards,
@@ -48,5 +49,9 @@ export class AppComponent {
     };
     this.store.dispatch(CardActions.add({ card }));
     this.taskMessage = '';
+  }
+
+  onLoadPosts() {
+    this.store.dispatch(PostActions.load());
   }
 }
