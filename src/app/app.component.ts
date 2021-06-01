@@ -24,6 +24,8 @@ export class AppComponent {
   id = 1;
   cardStatusEnum = ECardStatus;
 
+  taskMessage = '';
+
   constructor(private store: Store<IAppState>) {}
 
   ngOnInit() {
@@ -36,5 +38,15 @@ export class AppComponent {
     this.store.dispatch(
       CardActions.changeStatus({ cardId: card.id, newStatus: newCardStatus })
     );
+  }
+
+  onAddTask() {
+    const card: ICard = {
+      id: this.id++,
+      message: this.taskMessage,
+      status: ECardStatus.ToDo,
+    };
+    this.store.dispatch(CardActions.add({ card }));
+    this.taskMessage = '';
   }
 }

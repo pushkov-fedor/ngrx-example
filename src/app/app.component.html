@@ -1,9 +1,9 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col text-center">
-      <h2 class="border py-3">To Do</h2>
+      <h2 class="border text-white bg-primary py-3">To Do</h2>
       <div
-        class="card text-white bg-primary mb-3"
+        class="card text-white bg-primary user-select-none mb-3"
         *ngFor="let card of toDoCards$ | async"
       >
         <div class="card-header"></div>
@@ -21,9 +21,9 @@
       </div>
     </div>
     <div class="col text-center">
-      <h2 class="border py-3">In Progress</h2>
+      <h2 class="border text-dark bg-warning py-3">In Progress</h2>
       <div
-        class="card text-dark bg-warning mb-3"
+        class="card text-dark bg-warning user-select-nonemb-3"
         *ngFor="let card of inProgressCards$ | async"
       >
         <div class="card-header"></div>
@@ -47,9 +47,9 @@
       </div>
     </div>
     <div class="col text-center">
-      <h2 class="border py-3">Done</h2>
+      <h2 class="border text-white bg-success py-3">Done</h2>
       <div
-        class="card text-white bg-success mb-3"
+        class="card text-white bg-success user-select-none mb-3"
         *ngFor="let card of doneCards$ | async"
       >
         <div class="card-header"></div>
@@ -67,6 +67,23 @@
       </div>
     </div>
   </div>
-</div>
 
-<hr />
+  <hr />
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="taskMessage">Task message</label>
+        <input
+          type="text"
+          class="form-control"
+          id="taskMessage"
+          [(ngModel)]="taskMessage"
+        />
+      </div>
+      <button class="btn btn-primary mt-3" (click)="onAddTask()">
+        Add Task
+      </button>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
